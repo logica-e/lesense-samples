@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="lesenseMonitor">
+<head>
+  <title>Lesense Monitor</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/angular.min.js"></script>
+  <script src="js/si-table.min.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <div ng-controller="SensorCtrl">
+
+      <div class="page-header">
+        <h1>Lesense Monitor</h1>
+      </div>
+
+      <table class="table" si-table sorting="params.sortBy">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Timestamp</th>
+            <th>Sensor</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="sensor in sensor_data | filter:filter">
+            <td>{{ sensor.serial }}</td>
+            <td>{{ sensor.timestamp * 1000 | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+            <td>{{ sensor.sensor }}</td>
+            <td>{{ sensor.type }}</td>
+            <td>{{ sensor.value }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">
+              <si-table-pagination limit="10" total="{{ params.total }}" offset="params.offset" />
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+</body>
+</html>
